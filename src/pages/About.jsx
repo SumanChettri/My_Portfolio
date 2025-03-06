@@ -1,12 +1,11 @@
-// src/components/About.jsx
-
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Parallax } from 'react-scroll-parallax';
 import Particles from 'react-tsparticles';
 import { loadFull } from 'tsparticles';
 import {
-  FaGithub, FaHtml5, FaCss3Alt, FaJs, FaReact, FaNodeJs, FaPython, FaGitAlt, FaFigma, FaAndroid, FaBolt, FaGraduationCap, FaUniversity
+  FaGithub, FaHtml5, FaCss3Alt, FaJs, FaReact, FaNodeJs, FaPython, FaGitAlt,
+  FaFigma, FaAndroid, FaBolt, FaGraduationCap, FaUniversity, FaDatabase, FaDocker, FaLinux
 } from 'react-icons/fa';
 
 const About = () => {
@@ -49,6 +48,22 @@ const About = () => {
     background: { color: 'transparent' },
   };
 
+  const skills = [
+    { icon: FaHtml5, name: 'HTML5' },
+    { icon: FaCss3Alt, name: 'CSS3' },
+    { icon: FaJs, name: 'JavaScript' },
+    { icon: FaReact, name: 'React' },
+    { icon: FaNodeJs, name: 'Node.js' },
+    { icon: FaPython, name: 'Python' },
+    { icon: FaGitAlt, name: 'Git' },
+    { icon: FaFigma, name: 'Figma' },
+    { icon: FaAndroid, name: 'Android Studio' },
+    { icon: FaBolt, name: 'Tailwind CSS' },
+    { icon: FaDatabase, name: 'MongoDB' },
+    { icon: FaDocker, name: 'Docker' },
+    { icon: FaLinux, name: 'Linux' },
+  ];
+
   return (
     <section
       id="about"
@@ -58,10 +73,8 @@ const About = () => {
           : 'bg-gradient-to-br from-gray-100 via-gray-200 to-white'
       }`}
     >
-      {/* Particles */}
       <Particles id="tsparticles" init={particlesInit} options={particlesOptions} className="absolute inset-0 z-0" />
 
-      {/* Floating Glow */}
       <Parallax speed={-20}>
         <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500 opacity-20 blur-3xl rounded-full"></div>
       </Parallax>
@@ -79,7 +92,6 @@ const About = () => {
         className="relative z-10 w-44 h-44 rounded-full object-cover border-4 border-blue-500 shadow-[0_0_60px_rgba(0,0,255,0.6)] mb-6"
       />
 
-      {/* Name */}
       <motion.h1
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -88,81 +100,86 @@ const About = () => {
       >
         Suman Chettri
       </motion.h1>
-      <p className="relative z-10 text-lg text-gray-700 dark:text-gray-300 mt-2">
+      <p className="relative z-10 text-lg text-center text-gray-700 dark:text-gray-300 mt-2">
         Aspiring Full-Stack Developer
       </p>
 
-      {/* Social */}
       <div className="relative z-10 flex space-x-6 mt-4">
         <a href="https://github.com/SumanChettri" target="_blank" rel="noopener noreferrer">
           <FaGithub className="text-3xl text-gray-800 dark:text-white hover:text-blue-500 transition" />
         </a>
       </div>
 
-      {/* Education */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5, duration: 1 }}
-        className="relative z-10 mt-10 bg-white/60 dark:bg-gray-800/40 backdrop-blur-xl p-8 rounded-2xl shadow-xl max-w-3xl"
+        className="relative z-10 mt-10 bg-white/60 dark:bg-gray-800/40 backdrop-blur-xl p-10 rounded-3xl shadow-2xl w-full max-w-6xl"
       >
         <h2 className="text-3xl font-bold text-gray-800 dark:text-white flex items-center gap-3">
           <FaGraduationCap className="text-yellow-500" /> Education
         </h2>
-        <div className="mt-4 space-y-4">
+        <div className="mt-6 space-y-6">
           {[
             {
               icon: <FaUniversity className="text-blue-500" />,
               title: 'B.Tech in Computer Science and Engineering',
               place: 'Sikkim Institute of Science and Technology (SIST)',
+              duration: '2024 - 2027',
             },
             {
               icon: <FaUniversity className="text-pink-500" />,
               title: 'Diploma in Computer Engineering',
               place: 'Advanced Technical Training Center (ATTC)',
+              duration: '2022 - 2024',
             },
-          ].map(({ icon, title, place }, idx) => (
+            {
+              icon: <FaUniversity className="text-green-500" />,
+              title: 'Class 12th - Information Technology',
+              place: 'Sadam Senior Secondary School',
+              duration: 'Completed in 2022',
+            },
+          ].map(({ icon, title, place, duration }, idx) => (
             <motion.div
               key={idx}
-              whileHover={{ scale: 1.03 }}
-              className="flex items-center bg-white/40 dark:bg-gray-700/40 p-4 rounded-lg shadow-md backdrop-blur-lg transition"
+              whileHover={{ scale: 1.05 }}
+              className="flex items-center bg-white/40 dark:bg-gray-700/40 p-6 rounded-xl shadow-md backdrop-blur-lg transition"
             >
               {icon}
               <div className="ml-4">
-                <p className="text-lg text-gray-800 dark:text-gray-100 font-semibold">{title}</p>
+                <p className="text-lg font-semibold text-gray-800 dark:text-gray-100">{title}</p>
                 <p className="text-gray-600 dark:text-gray-400">{place}</p>
+                <p className="text-sm text-gray-500">{duration}</p>
               </div>
             </motion.div>
           ))}
         </div>
       </motion.div>
 
-      {/* Skills */}
-      <h2 className="relative z-10 text-3xl font-bold text-gray-800 dark:text-white mt-14">💡 Skills</h2>
-      <div className="relative z-10 grid grid-cols-2 md:grid-cols-5 gap-6 mt-6">
-        {[
-          FaHtml5, FaCss3Alt, FaJs, FaReact, FaNodeJs, FaPython, FaGitAlt, FaFigma, FaAndroid, FaBolt
-        ].map((Icon, idx) => (
+      <h2 className="relative z-10 text-3xl font-bold text-gray-800 dark:text-white mt-16">💡 Skills</h2>
+      <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 mt-8 w-full max-w-6xl">
+        {skills.map(({ icon: Icon, name }, idx) => (
           <motion.div
             key={idx}
-            initial={{ y: 10 }}
-            animate={{ y: [-10, 10, -10] }}
+            animate={{ y: [0, -10, 0] }}
             transition={{ repeat: Infinity, duration: 4 + idx * 0.1, ease: 'easeInOut' }}
-            className="flex flex-col items-center p-4 bg-white/40 dark:bg-gray-800/40 backdrop-blur-xl rounded-xl shadow-xl hover:scale-105 transition"
+            whileHover={{ scale: 1.1 }}
+            className="flex flex-col items-center p-4 md:p-6 bg-white/40 dark:bg-gray-800/40 rounded-xl shadow-xl"
           >
-            <Icon className="text-4xl text-blue-400 mb-2" />
+            <Icon className="text-4xl md:text-5xl text-blue-500 mb-2" />
+            <p className="text-sm md:text-base">{name}</p>
           </motion.div>
         ))}
       </div>
 
-      {/* CTA */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        className="relative z-10 mt-16 p-6 bg-gray-800 text-white rounded-full text-center text-2xl font-bold"
+      <motion.a
+        href="https://wa.me/919641025910"
+        target="_blank"
+        whileHover={{ scale: 1.05 }}
+        className="relative z-10 mt-16 p-4 md:p-6 bg-green-600 text-white rounded-full text-xl md:text-2xl font-bold"
       >
-        Ready to build something legendary? Let’s connect!
-      </motion.div>
+        Ready to build something legendary?
+      </motion.a>
     </section>
   );
 };

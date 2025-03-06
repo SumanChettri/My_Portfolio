@@ -1,58 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Parallax } from "react-scroll-parallax";
 import { FaArrowDown, FaCode, FaLaptopCode, FaPaintBrush } from "react-icons/fa";
 
-// Letter animation variants
-const letterVariant = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { type: "spring", stiffness: 300, damping: 20 },
-  },
-};
-
-const containerVariant = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.08, delayChildren: 0.5 },
-  },
-};
-
-const AnimatedText = ({ text, className = "" }) => {
-  const [show, setShow] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setShow(true), 100);
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (!show) return null;
-
-  return (
-    <motion.span
-      className={`inline-block ${className}`}
-      variants={containerVariant}
-      initial="hidden"
-      animate="visible"
-    >
-      {Array.from(text).map((letter, index) => (
-        <motion.span
-          key={index}
-          variants={letterVariant}
-          className="inline-block"
-        >
-          {letter === " " ? "\u00A0" : letter}
-        </motion.span>
-      ))}
-    </motion.span>
-  );
-};
-
 const Home = () => {
-  const [theme, setTheme] = useState("dark");
-
   useEffect(() => {
     document.documentElement.classList.add("dark");
     localStorage.setItem("theme", "dark");
@@ -62,14 +13,13 @@ const Home = () => {
     <motion.section
       initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1, ease: "easeOut" }}
+      transition={{ duration: 1 }}
       className="relative flex flex-col items-center justify-center min-h-screen px-6 py-20 text-center bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-900 dark:to-black transition-all duration-500 overflow-hidden"
     >
-      {/* Parallax Glows */}
+      {/* Background Glows */}
       <Parallax speed={-20}>
         <div className="absolute -z-10 w-80 h-80 bg-purple-500 opacity-30 blur-3xl rounded-full top-10 left-10"></div>
       </Parallax>
-
       <Parallax speed={15}>
         <div className="absolute -z-10 w-64 h-64 bg-blue-500 opacity-20 blur-3xl rounded-full bottom-20 right-20"></div>
       </Parallax>
@@ -81,34 +31,35 @@ const Home = () => {
         transition={{ delay: 0.3, duration: 1 }}
         className="mt-12 p-12 border-[6px] rounded-[40px] backdrop-blur-3xl bg-white/30 dark:bg-gray-800/40 border-gray-300 dark:border-gray-700 shadow-[0_20px_50px_rgba(0,0,0,0.2)] max-w-5xl"
       >
-        <h1 className="text-4xl md:text-6xl font-extrabold leading-tight flex flex-col md:flex-row items-center justify-center text-center">
-          <motion.span
-            initial={{ x: 20, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 1 }}
-            className="inline-block translate-x-3 md:translate-x-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent"
-          >
-            <AnimatedText text="Transforming Ideas" />
-          </motion.span>
-
-          <motion.span
-            initial={{ x: -20, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="inline-block -translate-x-3 md:translate-x-0 whitespace-nowrap bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent md:ml-3"
-          >
-            <AnimatedText text="Into Reality" />
-          </motion.span>
+        <h1 className="text-4xl md:text-6xl font-extrabold leading-tight text-center flex flex-wrap justify-center gap-2">
+          {["Transforming", "Ideas", "Into", "Reality"].map((word, idx) => (
+            <motion.span
+              key={idx}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 1,
+                delay: idx * 0.3,
+                type: "spring",
+                stiffness: 100,
+              }}
+              whileHover={{ scale: 1.1 }}
+              className="inline-block bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent animate-float"
+            >
+              {word}
+            </motion.span>
+          ))}
         </h1>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1, duration: 0.8 }}
+          transition={{ delay: 1.5, duration: 0.8 }}
           className="mt-8 text-lg md:text-2xl text-gray-700 dark:text-gray-300"
         >
           Turning concepts into dynamic, interactive digital experiences.
         </motion.p>
+
         <motion.a
           href="#projects"
           animate={{ scale: [1, 1.05, 1] }}
@@ -143,7 +94,9 @@ const Home = () => {
             >
               {icon}
             </motion.div>
-            <h3 className="text-2xl font-bold text-gray-800 dark:text-white">{title}</h3>
+            <h3 className="text-2xl font-bold text-gray-800 dark:text-white">
+              {title}
+            </h3>
             <p className="mt-3 text-gray-600 dark:text-gray-400">{desc}</p>
           </motion.div>
         ))}

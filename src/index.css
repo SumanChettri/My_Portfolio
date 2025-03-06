@@ -1,0 +1,21 @@
+/* index.css */
+html, body {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+  margin: 0;
+  padding: 0;
+  /* Remove any custom flex or place-items from earlier CSS: */
+  display: block;
+  overflow-x: hidden;
+  /* Let Tailwind classes handle alignment and layout. */
+}
+
+/* You can keep your color-scheme or other styles if you want, just remove display flex: */
+:root {
+  color-scheme: light dark;
+}
+
+/* Example tailwind imports: */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

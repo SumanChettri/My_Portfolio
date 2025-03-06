@@ -113,12 +113,12 @@ const About = () => {
           {[
             {
               icon: <FaUniversity className="text-blue-500" />,
-              title: 'B.Tech in Computer Science',
+              title: 'B.Tech in Computer Science and Engineering',
               place: 'Sikkim Institute of Science and Technology (SIST)',
             },
             {
               icon: <FaUniversity className="text-pink-500" />,
-              title: 'Diploma in Civil Engineering',
+              title: 'Diploma in Computer Engineering',
               place: 'Advanced Technical Training Center (ATTC)',
             },
           ].map(({ icon, title, place }, idx) => (

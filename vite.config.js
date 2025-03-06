@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react-swc';
 import path from 'path';
 
 export default defineConfig({
-base: '/My_Portfolio/',
+  base: '/My_Portfolio/',
   plugins: [react()],
   resolve: {
     alias: {

@@ -1,5 +1,3 @@
-// src/components/Contact.jsx
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FaPaperPlane, FaUser, FaEnvelope, FaTag, FaCommentDots } from 'react-icons/fa';
@@ -29,12 +27,15 @@ const Contact = () => {
         initial={{ opacity: 0, scale: 0.95 }}
         whileInView={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1 }}
+        action="https://formsubmit.co/sumantewari758@gmail.com" 
+        method="POST"
         className="relative z-10 w-full max-w-4xl p-10 bg-white/60 dark:bg-gray-800/60 backdrop-blur-2xl rounded-3xl shadow-2xl space-y-8"
-        onSubmit={(e) => {
-          e.preventDefault();
-          alert('Form submitted! (hook backend later)');
-        }}
       >
+        {/* Hidden Fields */}
+        <input type="hidden" name="_subject" value="New Contact Form Submission!" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_template" value="table" />
+
         {/* Input Fields */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Name */}
@@ -42,6 +43,7 @@ const Contact = () => {
             <FaUser className="absolute top-4 left-4 text-gray-500 group-focus-within:text-blue-500 transition" />
             <input
               type="text"
+              name="name"
               placeholder="Your Name"
               required
               className="w-full pl-12 p-4 rounded-xl bg-white/70 dark:bg-gray-700/70 border border-gray-300 dark:border-gray-600 text-gray-800 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 outline-none transition placeholder-gray-500"
@@ -53,6 +55,7 @@ const Contact = () => {
             <FaEnvelope className="absolute top-4 left-4 text-gray-500 group-focus-within:text-blue-500 transition" />
             <input
               type="email"
+              name="email"
               placeholder="you@example.com"
               required
               className="w-full pl-12 p-4 rounded-xl bg-white/70 dark:bg-gray-700/70 border border-gray-300 dark:border-gray-600 text-gray-800 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 outline-none transition placeholder-gray-500"
@@ -65,6 +68,7 @@ const Contact = () => {
           <FaTag className="absolute top-4 left-4 text-gray-500 group-focus-within:text-blue-500 transition" />
           <input
             type="text"
+            name="subject"
             placeholder="Subject"
             required
             className="w-full pl-12 p-4 rounded-xl bg-white/70 dark:bg-gray-700/70 border border-gray-300 dark:border-gray-600 text-gray-800 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 outline-none transition placeholder-gray-500"
@@ -75,6 +79,7 @@ const Contact = () => {
         <div className="relative group">
           <FaCommentDots className="absolute top-4 left-4 text-gray-500 group-focus-within:text-blue-500 transition" />
           <textarea
+            name="message"
             placeholder="Your Message"
             required
             rows="5"

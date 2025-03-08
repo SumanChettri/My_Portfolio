@@ -6,7 +6,10 @@ html, body {
   padding: 0;
   /* Remove any custom flex or place-items from earlier CSS: */
   display: block;
-  overflow-x: hidden;
+    overscroll-behavior: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  
+  
   /* Let Tailwind classes handle alignment and layout. */
 }
 

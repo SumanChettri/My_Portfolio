@@ -12,6 +12,8 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "@react-three/drei": "^10.0.4",
+    "@react-three/fiber": "^9.1.0",
     "emailjs-com": "^3.2.0",
     "framer-motion": "^12.4.10",
     "particles-bg": "^2.5.5",

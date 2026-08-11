@@ -6,7 +6,7 @@ import Home from './components/Home';
 import WhatIBuild from './components/WhatIBuild';
 import About from './pages/About';
 import Projects from './pages/Projects';
-import SystemMap from './components/SystemMap';
+import EngineeringPhilosophy from './components/EngineeringPhilosophy';
 import Services from './components/Services';
 import Contact from './pages/Contacts';
 import Footer from './components/Footer';
@@ -61,18 +61,25 @@ function App() {
       {isLoading ? (
         <Preloader finishLoading={() => setIsLoading(false)} />
       ) : (
-        <div className="font-sans transition-colors duration-500 bg-white dark:bg-gray-950 min-h-screen text-gray-900 dark:text-gray-100">
+        <div className="font-sans transition-colors duration-500 bg-gradient-to-br from-slate-100 via-slate-200 to-white dark:from-slate-950 dark:via-black dark:to-slate-950 min-h-screen text-slate-900 dark:text-slate-100 relative">
+          {/* Global Cyber Dots Background Layer */}
+          <div className="fixed inset-0 bg-[radial-gradient(#64748b_1px,transparent_1px)] dark:bg-[radial-gradient(#38bdf8_1.2px,transparent_1.2px)] [background-size:24px_24px] opacity-25 dark:opacity-30 pointer-events-none z-0"></div>
+
+          {/* Global Ambient Glow Orbs */}
+          <div className="fixed top-10 left-5 w-[350px] sm:w-[500px] h-[350px] sm:h-[500px] bg-cyan-500/15 dark:bg-cyan-500/10 blur-[140px] rounded-full pointer-events-none z-0"></div>
+          <div className="fixed bottom-10 right-5 w-[350px] sm:w-[500px] h-[350px] sm:h-[500px] bg-purple-600/15 dark:bg-purple-600/10 blur-[140px] rounded-full pointer-events-none z-0"></div>
+
           <Navbar
             darkMode={darkMode}
             toggleDarkMode={toggleDarkMode}
             onOpenCmd={() => setIsCmdOpen(true)}
           />
-          <main>
+          <main className="relative z-10">
             <Home onOpenCmd={() => setIsCmdOpen(true)} />
             <WhatIBuild />
             <About />
             <Projects />
-            <SystemMap />
+            <EngineeringPhilosophy />
             <Services />
             <Contact />
           </main>

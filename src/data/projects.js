@@ -3,19 +3,19 @@
 export const FLAGSHIP_PROJECTS = [
   {
     id: 'smart-parking',
-    title: 'Smart Parking & Gate System',
-    tagline: 'A connected hardware-to-cloud system bridging physical IR barrier gates, keypad OTP access, Node.js API, and React Native mobile app.',
-    category: 'Web + Mobile + Backend + IoT',
-    role: 'Hardware & Software Lead',
-    metric: '< 200ms Hardware-to-Cloud Sync',
-    description: 'Ever spent 20 minutes circling a parking lot wondering if the universe is testing your patience? I built this system to fix that. IR sensors track slot availability in real time and send data via ESP32 to an Express/MongoDB backend. Drivers can reserve spots on the web or mobile app, get an instant OTP, and punch it into a physical keypad at the gate to raise the servo barrier.',
+    title: 'Smart Parking & Gate Access System',
+    tagline: 'An integrated hardware and software system connecting physical barrier gates, IR occupancy sensors, Node.js REST API, and a React Native mobile app.',
+    category: 'Web • Mobile • IoT',
+    role: 'Hardware & Software Developer',
+    metric: '< 200ms Sensor-to-Cloud Sync',
+    description: 'Designed and built an end-to-end smart parking prototype to solve physical parking allocation and gate access delays. Infrared sensor arrays monitor individual parking slots and stream occupancy state to an Express/MongoDB backend via ESP32 microcontrollers. Drivers can view available slots, reserve a space on the web or mobile app, receive an OTP verification code, and enter it into an entry keypad to automatically raise the servo barrier gate.',
     architectureNodes: [
       { id: 'web', label: 'React Web Dashboard', type: 'frontend', protocol: 'HTTPS / REST' },
       { id: 'mobile', label: 'React Native App', type: 'mobile', protocol: 'HTTPS / JSON' },
       { id: 'api', label: 'Node.js & Express API', type: 'backend', protocol: 'WebSocket / HTTP' },
       { id: 'db', label: 'MongoDB Database', type: 'database', protocol: 'Mongoose' },
-      { id: 'mcu', label: 'ESP32 / ESP8266 MCU', type: 'hardware', protocol: 'UART / Wi-Fi API' },
-      { id: 'peripherals', label: 'IR Array + Servo + Keypad + LCD', type: 'embedded', protocol: 'I2C / PWM' },
+      { id: 'mcu', label: 'ESP32 Controller', type: 'hardware', protocol: 'Wi-Fi / HTTP API' },
+      { id: 'peripherals', label: 'IR Array + Servo + Keypad + LCD', type: 'embedded', protocol: 'GPIO / PWM / I2C' },
     ],
     architectureText: `[React Web UI]      [React Native App]
        │                        │
@@ -25,47 +25,46 @@ export const FLAGSHIP_PROJECTS = [
                    │
          ┌─────────┴─────────┐
          ▼                   ▼
-  [MongoDB Cluster]    [ESP32 / ESP8266 IoT Controller]
+  [MongoDB Cluster]    [ESP32 IoT Controller]
                              │
             ┌────────────────┼────────────────┐
             ▼                ▼                ▼
-     [8x IR Sensors]   [Keypad + LCD]   [Servo Gate Motor]`,
-    problem: 'Drivers waste fuel searching for empty parking spaces, while facility managers rely on outdated manual ticket counters that lag behind real-world slot occupancy.',
-    solution: 'Designed an automated physical-to-digital loop: hardware sensors auto-detect cars, update cloud databases instantly, and grant gate access via secure single-use keypad OTPs.',
+     [IR Sensors]      [Keypad + LCD]   [Servo Gate Motor]`,
+    problem: 'Drivers waste time searching for open parking spaces, while traditional facilities rely on manual tickets or uncoordinated entry gates that slow down traffic.',
+    solution: 'Engineered a physical-to-cloud feedback loop where optical sensors update slot availability instantly in the database, allowing driver reservations and automated gate opening via keypad OTP validation.',
     tradeoffs: [
-      'Used HTTP client polling with fallback WebSockets so the microcontrollers stay responsive even under spotty Wi-Fi signals.',
-      'Selected MongoDB for its document flexibility when logging transient parking reservations and sensor event streams.',
-      'Configured local fallback memory on the ESP32 so the physical keypad still unlocks the gate if internet connectivity drops.',
+      'Used lightweight HTTP polling with fallback WebSockets to maintain reliable sensor state updates on low-power microcontrollers.',
+      'Selected MongoDB for flexible storage of transient parking reservations, user access logs, and sensor event history.',
+      'Implemented local memory buffering on the ESP32 so local keypad PIN validation works even during temporary Wi-Fi disconnects.',
     ],
     challenges: [
-      'Direct sunlight reflecting off car windshields confused the IR optical sensors into detecting non-existent phantom cars.',
-      'Rapid keypad presses caused mechanical debouncing noise, turning a simple "1234" OTP into "11223344".',
+      'Ambient sunlight reflections occasionally triggered false positives on optical infrared sensors.',
+      'Mechanical contact bounce on the 4x4 matrix keypad resulted in duplicate character inputs during fast typing.',
     ],
     debugging: [
-      'Added software digital window filtering in C++ to smooth out erratic infrared intensity spikes.',
-      'Implemented hardware RC decoupling filter circuits and software interrupt timers to stop keypad double-triggering.',
+      'Implemented digital sliding-window filtering in the C++ firmware to smooth out infrared intensity fluctuations.',
+      'Added hardware RC filtering capacitors and software timer interrupts to clean up keypad signal debouncing.',
     ],
-    result: 'Built a reliable physical hardware prototype with sub-200ms sensor sync, instant mobile OTP generation, and smooth servo barrier gate actuation.',
-    future: 'Add license plate recognition via ESP32-CAM so drivers don\'t even have to roll down their windows.',
-    techJoke: 'Why do hardware engineers hate dark mode? Because light attracts real bugs, but dark mode hides bad wiring!',
-    techStack: ['ESP32', 'ESP8266', 'React 19', 'React Native', 'Node.js', 'Express', 'MongoDB', 'REST APIs', 'IR Sensors', 'Servo Motors', 'Keypad', 'I2C LCD'],
+    result: 'Built a working physical prototype demonstrating real-time slot occupancy tracking, mobile OTP reservations, and automated servo gate control.',
+    future: 'Integrate license plate recognition using ESP32-CAM to streamline entry without manual keypad input.',
+    techStack: ['ESP32', 'React 19', 'React Native', 'Node.js', 'Express', 'MongoDB', 'REST APIs', 'IR Sensors', 'Servo Motors', 'Keypad', 'I2C LCD'],
     githubUrl: 'https://github.com/SumanChettri',
     liveUrl: 'https://github.com/SumanChettri',
   },
   {
     id: 'organic-store',
     title: 'Organic Store — E-Commerce Platform',
-    tagline: 'A full-stack e-commerce web platform for ordering farm-fresh organic produce with real-time cart state & fast checkout.',
-    category: 'Full-Stack Web & E-Commerce',
-    role: 'Full-Stack Engineer',
-    metric: 'Sub-100ms API Response & Instant Cart',
-    description: 'Shopping for fresh organic fruits and veggies should be as smooth as eating them. Organic Store is a full-stack e-commerce site equipped with produce categories, real-time product search, persistent cart state, user profile management, secure JWT authentication, and an intuitive admin dashboard for managing inventory.',
+    tagline: 'A full-stack e-commerce web platform for ordering fresh organic produce with real-time shopping cart management and order tracking.',
+    category: 'Full-Stack Web',
+    role: 'Full-Stack Developer',
+    metric: 'Sub-100ms API Response Time',
+    description: 'Developed a full-stack web application designed for direct-to-consumer organic produce ordering. The platform features categorized product browsing, dynamic keyword search, persistent shopping cart state, user session management, JWT authentication, and an administrative panel for managing daily produce inventory and order fulfillment.',
     architectureNodes: [
-      { id: 'frontend', label: 'React 19 UI (Tailwind + Framer)', type: 'frontend', protocol: 'Client SPA' },
+      { id: 'frontend', label: 'React 19 Client UI', type: 'frontend', protocol: 'Single Page App' },
       { id: 'gateway', label: 'Express.js API Router', type: 'backend', protocol: 'REST APIs' },
-      { id: 'auth', label: 'JWT Auth & Middleware', type: 'security', protocol: 'Bearer Token' },
-      { id: 'database', label: 'MongoDB (Products, Orders, Users)', type: 'database', protocol: 'BSON Queries' },
-      { id: 'services', label: 'Order Dispatch & Email Notifier', type: 'backend', protocol: 'Async Service' },
+      { id: 'auth', label: 'JWT Auth Middleware', type: 'security', protocol: 'Bearer Token' },
+      { id: 'database', label: 'MongoDB Database', type: 'database', protocol: 'BSON Queries' },
+      { id: 'services', label: 'Order Dispatch Service', type: 'backend', protocol: 'Async Processing' },
     ],
     architectureText: `[React 19 Responsive Client]
          │ (RESTful JSON Requests)
@@ -76,21 +75,20 @@ export const FLAGSHIP_PROJECTS = [
 [MongoDB Storage] ──► [Products Collection]
                   ──► [Orders Collection]
                   ──► [Users Collection]`,
-    problem: 'Local organic farmers often struggle to sell directly to consumers because existing template builders are bloated, slow, and hard to customize for daily produce inventory updates.',
-    solution: 'Engineered a tailored, lightweight full-stack web app that loads instantly on mobile devices, manages cart items locally for smooth UX, and syncs orders with a Node.js/MongoDB backend.',
+    problem: 'Local farm producers need a fast, clean web storefront to sell seasonal produce directly without relying on bloated, slow third-party platforms.',
+    solution: 'Built a lightweight custom React and Node.js application that loads quickly on mobile devices, manages cart items locally for responsive UX, and processes orders cleanly against a MongoDB backend.',
     tradeoffs: [
-      'Kept the shopping cart state in client-side React hooks synced with localStorage for zero-latency UI updates, validating final prices against the server at checkout.',
-      'Designed flexible Mongoose schemas to handle seasonal produce price shifts and per-kilogram inventory metrics easily.',
+      'Maintained cart state client-side using React context and localStorage for zero UI lag, verifying inventory and pricing against the database at checkout.',
+      'Structured MongoDB schemas to support seasonal availability flags and per-kilogram stock updates without complex migration steps.',
     ],
     challenges: [
-      'Preventing race conditions where two customers try to buy the last basket of organic strawberries simultaneously.',
+      'Handling concurrent customer checkouts for limited seasonal items to avoid overselling stock.',
     ],
     debugging: [
-      'Used atomic MongoDB document updates ($inc) during order creation to ensure inventory locks cleanly or throws a friendly out-of-stock notice.',
+      'Utilized atomic MongoDB document updates ($inc) during order confirmation to lock inventory quantities safely.',
     ],
-    result: 'Delivered an inviting, super fast e-commerce platform with zero lag, smooth UI animations, and clean database architecture.',
-    future: 'Add WhatsApp order notification webhooks so farmers get instant notifications when fresh orders drop.',
-    techJoke: 'There are only two hard things in Computer Science: cache invalidation, naming things, and off-by-one errors.',
+    result: 'Delivered a clean, responsive e-commerce web application with instant page navigation, reliable cart handling, and structured database queries.',
+    future: 'Integrate automated SMS/WhatsApp order status notifications for customers upon dispatch.',
     techStack: ['React 19', 'Vite', 'Tailwind CSS', 'Framer Motion', 'Node.js', 'Express.js', 'MongoDB', 'JWT Auth', 'REST APIs'],
     githubUrl: 'https://github.com/SumanChettri',
     liveUrl: 'https://github.com/SumanChettri',
@@ -98,18 +96,18 @@ export const FLAGSHIP_PROJECTS = [
   {
     id: 'line-follower',
     title: 'High-Speed Autonomous Line Follower',
-    tagline: 'Competition-winning autonomous robot built with an 8-channel IR array, closed-loop PID control algorithm, and differential drive.',
-    category: 'Autonomous Robotics & Embedded',
-    role: 'Robotics Engineer & Firmware Developer',
-    metric: '🏆 1st Place Winner — 100% Track Completion',
-    description: 'Building a robot that races along a tricky track at breakneck speeds without flying off the edges takes real control engineering. My high-speed line follower won 1st Place in the robotics competition. It uses an 8-channel IR sensor array, real-time sensor calibration, a tuned PID feedback algorithm in C++, and PWM motor speed compensation.',
+    tagline: 'A competition-winning autonomous robot utilizing an 8-channel IR sensor array, closed-loop PID control, and differential motor driving.',
+    category: 'Autonomous Robotics',
+    role: 'Firmware & Robotics Engineer',
+    metric: '🏆 1st Place Competition Winner',
+    description: 'Designed, built, and programmed an autonomous line-following robot that achieved 1st place in a regional robotics competition. The robot processes inputs from an 8-channel infrared sensor array using a custom PID feedback control loop written in C++, calculating position error continuously to adjust differential motor speeds through sharp curves and intersections.',
     architectureNodes: [
       { id: 'ir', label: '8-Channel IR Sensor Array', type: 'embedded', protocol: 'Analog Readings' },
-      { id: 'calib', label: 'Calibration & Noise Filter', type: 'firmware', protocol: 'DSP / Mapping' },
+      { id: 'calib', label: 'Sensor Calibration Module', type: 'firmware', protocol: 'Signal Mapping' },
       { id: 'pid', label: 'PID Controller Engine', type: 'firmware', protocol: 'Closed-Loop Math' },
-      { id: 'pwm', label: 'PWM Duty Cycle Generator', type: 'hardware', protocol: 'Timers / Interrupts' },
-      { id: 'driver', label: 'TB6612 / DRV8833 Motor Driver', type: 'hardware', protocol: 'H-Bridge PWM' },
-      { id: 'motors', label: 'High-RPM DC Gear Motors', type: 'robotics', protocol: 'Differential Motion' },
+      { id: 'pwm', label: 'PWM Speed Generator', type: 'hardware', protocol: 'Timers / Interrupts' },
+      { id: 'driver', label: 'TB6612 Motor Driver', type: 'hardware', protocol: 'H-Bridge Control' },
+      { id: 'motors', label: 'Dual DC Gear Motors', type: 'robotics', protocol: 'Differential Drive' },
     ],
     architectureText: `[8-Channel IR Array] ──► [Analog Signal Sampling]
                                │
@@ -124,23 +122,22 @@ export const FLAGSHIP_PROJECTS = [
                                │
                                ▼
                     [Dual Motor Driver & DC Motors]`,
-    problem: 'Maintaining high speed on straight paths while taking tight 90-degree turns and sharp hairpin bends without overshooting the line or stalling the motors.',
-    solution: 'Wrote a closed-loop PID algorithm in C++ that calculates position error hundreds of times per second, continuously adjusting motor speeds to keep the robot centered on the line.',
+    problem: 'Navigating sharp 90-degree turns and track crossovers at high speeds without losing path alignment or suffering motor oscillation.',
+    solution: 'Implemented a closed-loop PID feedback control algorithm in C++ that calculates track offset error hundreds of times per second to deliver smooth motor corrections.',
     tradeoffs: [
-      'Aggressively tuned the Derivative (Kd) constant to damp down oscillations at high speeds, accepting slight turn latency to guarantee track stability.',
-      'Selected high-frequency PWM driving to prevent low-speed motor chattering during micro-corrections.',
+      'Tuned the Derivative (Kd) parameter aggressively to dampen oscillations during high-speed straightaways.',
+      'Selected high-frequency PWM driving to prevent low-speed motor chatter during micro-steering adjustments.',
     ],
     challenges: [
-      'DC motor manufacturing variances meant the left motor spun 5% faster than the right motor at equal voltage.',
-      'Venue lighting changes between test runs altered baseline IR sensor surface readings.',
+      'DC motor manufacturing tolerances resulted in a 5% speed imbalance between the left and right drive wheels.',
+      'Varying ambient lighting conditions shifted baseline sensor reflectance thresholds between competition rounds.',
     ],
     debugging: [
-      'Wrote an automatic boot-up calibration sequence so the robot scans the surface and auto-adjusts white/black thresholds before every race.',
-      'Added software motor trim factors in firmware to perfectly balance dual-wheel RPM.',
+      'Programmed an automatic boot-time calibration sequence to map white and black surface reflection baselines before each run.',
+      'Added software motor trim factors in firmware to equalize dual-wheel RPM output.',
     ],
-    result: 'Took 1st Place in the Autonomous Rover & Line Follower competition with the fastest lap time and zero course departures.',
-    future: 'Add optical wheel encoders for full dead-reckoning positional mapping and telemetry transmission.',
-    techJoke: 'Robotics Rule #1: If at first you don\'t succeed, call it version 1.0 and blame the hardware!',
+    result: 'Secured 1st Place in the Autonomous Rover & Line Follower competition with complete track accuracy and zero course departures.',
+    future: 'Add optical rotary encoders for dead-reckoning positional tracking and velocity logging.',
     techStack: ['Arduino UNO', 'ESP32', 'C++', '8-Channel IR Array', 'PID Control', 'PWM', 'TB6612 Driver', 'Sensor Calibration', 'Differential Drive'],
     githubUrl: 'https://github.com/SumanChettri',
     liveUrl: 'https://github.com/SumanChettri',
@@ -148,17 +145,17 @@ export const FLAGSHIP_PROJECTS = [
   {
     id: 'argus-rover',
     title: 'ARGUS — Autonomous Reconnaissance Rover',
-    tagline: 'An unmanned ground utility vehicle equipped with ESP32-CAM video streaming, obstacle avoidance, and hazardous gas/temp sensors.',
-    category: 'Robotics & Remote Monitoring',
-    role: 'Embedded & Robotics Developer',
-    metric: 'Real-Time Video Stream & Live Sensor Feeds',
-    description: 'ARGUS (Autonomous Reconnaissance & Ground Utility System) was built for environments where sending a human is either dangerous or impractical. Powered by dual ESP32 microcontrollers, it streams live video over Wi-Fi while monitoring ambient temperature, humidity, gas leaks, and obstacle distances for emergency search and rescue support.',
+    tagline: 'An unmanned ground utility vehicle featuring ESP32-CAM video streaming, obstacle avoidance, and ambient environmental sensors.',
+    category: 'Robotics & Telemetry',
+    role: 'Embedded Software Engineer',
+    metric: 'Real-Time Video Stream & Telemetry',
+    description: 'ARGUS (Autonomous Reconnaissance & Ground Utility System) is an unmanned ground vehicle designed for hazardous area exploration and remote environmental inspection. Powered by dual ESP32 microcontrollers, it streams live video over Wi-Fi while logging real-time temperature, gas presence, and obstacle distances to a browser-based monitoring terminal.',
     architectureNodes: [
       { id: 'cam', label: 'ESP32-CAM Video Processor', type: 'hardware', protocol: 'MJPEG Stream' },
-      { id: 'sensors', label: 'Obstacle + Gas + Temp Array', type: 'embedded', protocol: 'GPIO / ADC' },
+      { id: 'sensors', label: 'Obstacle + Gas + Temp Sensors', type: 'embedded', protocol: 'GPIO / ADC' },
       { id: 'mcu', label: 'ESP32 Main Flight Controller', type: 'firmware', protocol: 'FreeRTOS Tasks' },
-      { id: 'wireless', label: 'Wi-Fi AP Telemetry Link', type: 'backend', protocol: 'WebSockets / HTTP' },
-      { id: 'dashboard', label: 'Web Recon Command Center', type: 'frontend', protocol: 'HTML5 / Canvas' },
+      { id: 'wireless', label: 'Wi-Fi Telemetry Link', type: 'backend', protocol: 'WebSockets / HTTP' },
+      { id: 'dashboard', label: 'Web Command Terminal', type: 'frontend', protocol: 'HTML5 / Canvas' },
     ],
     architectureText: `[Sensors: Temp / Gas / Obstacles]    [ESP32-CAM Camera]
                    │                          │
@@ -168,20 +165,19 @@ export const FLAGSHIP_PROJECTS = [
                                 │ (Wi-Fi WebSockets)
                                 ▼
                    [Web Command & Monitoring UI]`,
-    problem: 'First responders in disaster scenarios lack low-cost, portable ground rovers to inspect hazardous rooms or unstable structures before entering.',
-    solution: 'Built a lightweight wireless ground rover that streams live video feeds directly to a web browser dashboard while constantly measuring air quality and temperature.',
+    problem: 'Inspecting hazardous or confined spaces poses safety risks for personnel without low-cost remote inspection tools.',
+    solution: 'Built a wireless ground rover that transmits low-latency video and environmental sensor readings to a web command interface over local Wi-Fi.',
     tradeoffs: [
-      'Dedicated Core 0 of the dual-core ESP32 strictly to video camera frame processing, leaving Core 1 free for FreeRTOS motor control and sensor loops.',
+      'Dedicated Core 0 of the ESP32 strictly to camera frame capture while running sensor reading and motor control loops on Core 1.',
     ],
     challenges: [
-      'High motor starting current caused power voltage drops that occasionally triggered ESP32 brownout resets.',
+      'High initial motor current draw caused power rail voltage dips, triggering ESP32 brownout resets.',
     ],
     debugging: [
-      'Separated the microcontroller logic power rail from the motor power rail using dedicated buck converters and Li-ion 18650 cells.',
+      'Separated logic and motor power paths using dedicated buck converters and Li-ion 18650 battery cells.',
     ],
-    result: 'Successfully completed physical field tests with stable wireless video feeds and continuous telemetry reporting.',
-    future: 'Integrate ROS (Robot Operating System) nodes for autonomous SLAM mapping and path planning.',
-    techJoke: 'Hardware rule: It\'s not a bug, it\'s a thermal emission feature!',
+    result: 'Demonstrated stable video streaming and real-time sensor reporting across physical field testing.',
+    future: 'Integrate ROS (Robot Operating System) nodes for autonomous SLAM mapping.',
     techStack: ['ESP32', 'ESP32-CAM', 'C++', 'FreeRTOS', 'IR & Ultrasonic Sensors', 'Gas Sensors', 'Wi-Fi Streaming', 'HTML5 Dashboard'],
     githubUrl: 'https://github.com/SumanChettri',
     liveUrl: 'https://github.com/SumanChettri',
@@ -189,16 +185,16 @@ export const FLAGSHIP_PROJECTS = [
   {
     id: 'basketball-scoreboard',
     title: 'Smart LED Basketball Scoreboard',
-    tagline: 'An outdoor physical LED matrix scoreboard controlled wirelessly via a browser interface hosted directly on an ESP32.',
-    category: 'Embedded Systems + Web Control',
-    role: 'Embedded Software Engineer',
-    metric: 'Zero-Flicker LED Matrix Refresh Rate',
-    description: 'Commercial sports scoreboards are either ridiculously expensive or inconvenient to operate. I built a smart physical scoreboard using high-brightness P10 LED matrix panels driven by an ESP32. Court referees can update team scores, period timers, shot clocks, and team names right from their phone via an embedded web interface.',
+    tagline: 'An outdoor physical LED matrix scoreboard controlled wirelessly via an embedded web server hosted directly on an ESP32.',
+    category: 'Embedded Systems',
+    role: 'Embedded Developer',
+    metric: 'Zero-Flicker Display Refresh Rate',
+    description: 'Designed a smart physical sports scoreboard using high-brightness P10 LED matrix panels driven by an ESP32 microcontroller. The system hosts an embedded web server allowing referees or scorekeepers to update scores, period clocks, shot timers, and team names wirelessly from any smartphone or tablet.',
     architectureNodes: [
-      { id: 'web', label: 'Browser Referee Controller', type: 'frontend', protocol: 'WebSocket / HTTP' },
+      { id: 'web', label: 'Mobile Referee Web UI', type: 'frontend', protocol: 'WebSocket / HTTP' },
       { id: 'mcu', label: 'ESP32 Microcontroller', type: 'hardware', protocol: 'Embedded Web Server' },
-      { id: 'dma', label: 'HUB12 SPI / DMA Driver', type: 'firmware', protocol: 'Direct Memory Access' },
-      { id: 'display', label: 'P10 LED Matrix Panel', type: 'embedded', protocol: 'High-Brightness LED' },
+      { id: 'dma', label: 'SPI / Display Driver', type: 'firmware', protocol: 'Direct SPI Driver' },
+      { id: 'display', label: 'P10 Outdoor LED Matrix', type: 'embedded', protocol: 'HUB12 SPI' },
     ],
     architectureText: `[Smartphone / Tablet Web UI]
                │ (Wi-Fi WebSocket Signals)
@@ -207,21 +203,20 @@ export const FLAGSHIP_PROJECTS = [
                │ (Direct SPI / DMA Driver)
                ▼
 [P10 Outdoor LED Matrix Display]`,
-    problem: 'Manual flip scoreboards require dedicated scorekeepers standing at courtside, while commercial LED displays cost thousands and lack open web interfaces.',
-    solution: 'Designed an affordable, high-visibility P10 LED scoreboard driven by an ESP32 microcontroller hosting its own wireless web dashboard.',
+    problem: 'Commercial outdoor scoreboards are expensive and lack customizable wireless web control interfaces.',
+    solution: 'Built an affordable, high-visibility LED scoreboard powered by an ESP32 hosting an interactive wireless web controller.',
     tradeoffs: [
-      'Used direct SPI and timer interrupts so the LED matrix refreshes continuously at high speed without flickering when web requests arrive.',
+      'Utilized direct timer interrupts and SPI transfers to refresh the display matrix continuously without flicker when processing web requests.',
     ],
     challenges: [
-      'Turning on all LEDs simultaneously caused a massive current surge that dimmed the display.',
+      'Illuminating all LED matrix segments simultaneously caused current spikes that dimmed the display.',
     ],
     debugging: [
-      'Upgraded to a 5V 10A switching power supply with heavy-gauge copper wiring to handle peak brightness bursts.',
+      'Added a dedicated 5V 10A switching power supply with heavy-gauge copper wiring to stabilize supply voltage.',
     ],
-    result: 'Built a crisp outdoor sports display capable of real-time wireless game scoring from any smartphone.',
-    future: 'Add loud physical buzzer triggers and Bluetooth handheld button remotes.',
-    techJoke: 'Why did the hardware engineer cross the road? To lower the impedance on the other side!',
-    techStack: ['ESP32', 'Arduino', 'C++', 'P10 LED Matrix', 'SPI / DMA', 'Embedded Web Server', 'WebSockets', 'HTML/CSS/JS'],
+    result: 'Constructed a fully functional outdoor score display capable of real-time wireless scoring adjustments.',
+    future: 'Add integrated physical audio horn triggers and handheld Bluetooth remote support.',
+    techStack: ['ESP32', 'Arduino', 'C++', 'P10 LED Matrix', 'SPI Driver', 'Embedded Web Server', 'WebSockets', 'HTML/CSS/JS'],
     githubUrl: 'https://github.com/SumanChettri',
     liveUrl: 'https://github.com/SumanChettri',
   },

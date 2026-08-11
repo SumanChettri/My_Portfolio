@@ -10,7 +10,6 @@ import {
   FaLayerGroup,
   FaArrowRight,
   FaTrophy,
-  FaFilter,
   FaExclamationTriangle
 } from 'react-icons/fa';
 import ProjectModal from '../components/ProjectModal';
@@ -62,71 +61,67 @@ const Projects = () => {
   return (
     <section
       id="projects"
-      className="relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-8 py-20 bg-gradient-to-br from-gray-100 via-gray-200 to-white dark:from-black dark:via-gray-950 dark:to-black transition-all duration-500 overflow-hidden"
+      className="relative flex flex-col items-center justify-center px-3 sm:px-6 lg:px-8 py-14 sm:py-24 bg-transparent text-slate-900 dark:text-white"
     >
-      {/* Background Glow */}
-      <div className="absolute top-1/4 left-0 w-96 h-96 bg-blue-500/10 blur-3xl rounded-full pointer-events-none"></div>
-      <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-purple-500/10 blur-3xl rounded-full pointer-events-none"></div>
-
       {/* Section Heading */}
       <motion.div
-        initial={{ opacity: 0, y: -30 }}
+        initial={{ opacity: 0, y: -20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
-        className="text-center max-w-3xl mb-16 relative z-10"
+        transition={{ duration: 0.8 }}
+        className="text-center max-w-3xl mb-8 sm:mb-16 relative z-10"
       >
-        <span className="px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-600 dark:text-cyan-400 text-xs font-mono font-semibold tracking-widest uppercase">
-          Engineering Showcase
+        <span className="px-3.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-700 dark:text-cyan-400 text-[11px] sm:text-xs font-mono font-semibold tracking-widest uppercase">
+          Engineering Case Studies
         </span>
-        <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mt-4 tracking-tight">
-          Flagship Engineering Case Studies
+        <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white mt-3 sm:mt-4 tracking-tight">
+          Featured Engineering Projects
         </h2>
-        <p className="text-gray-600 dark:text-gray-400 text-base md:text-lg mt-3">
-          Deep-dive technical case studies covering architectural decisions, data flows, hardware integration, and trade-offs.
+        <p className="text-slate-600 dark:text-slate-400 text-xs sm:text-base md:text-lg mt-2 sm:mt-3">
+          Practical case studies detailing software design, physical hardware integration, network protocols, and real-world results.
         </p>
       </motion.div>
 
-      {/* Flagship Case Studies Grid (5 Projects) */}
-      <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl w-full mb-24">
+      {/* Flagship Case Studies Grid (2 Columns per row on Mobile!) */}
+      <div className="relative z-10 grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-8 max-w-7xl w-full mb-12 sm:mb-24">
         {FLAGSHIP_PROJECTS.map((project, idx) => (
           <motion.div
             key={project.id}
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: idx * 0.12 }}
-            whileHover={{ y: -8 }}
+            transition={{ duration: 0.5, delay: idx * 0.08 }}
+            whileHover={{ y: -4 }}
             onClick={() => setSelectedProject(project)}
-            className="group cursor-pointer relative p-8 rounded-3xl backdrop-blur-2xl bg-white/70 dark:bg-gray-900/50 border border-gray-200 dark:border-gray-800 shadow-xl hover:shadow-2xl hover:border-cyan-500/50 transition-all flex flex-col justify-between"
+            className="group cursor-pointer relative p-3.5 sm:p-8 rounded-2xl sm:rounded-3xl backdrop-blur-xl bg-white/90 dark:bg-slate-900/60 border border-slate-300/80 dark:border-slate-800 shadow-md hover:shadow-xl hover:border-cyan-500/50 transition-all flex flex-col justify-between"
           >
             <div>
-              <div className="flex items-center justify-between mb-4">
-                <span className="px-3 py-1 bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 text-xs font-mono font-bold rounded-full border border-cyan-500/20">
+              <div className="flex items-center justify-between mb-2.5 sm:mb-4">
+                <span className="px-2 sm:px-3 py-0.5 sm:py-1 bg-blue-50 dark:bg-cyan-500/10 text-blue-700 dark:text-cyan-400 text-[10px] sm:text-xs font-mono font-bold rounded-full border border-blue-200 dark:border-cyan-500/20 truncate max-w-[110px] sm:max-w-none">
                   {project.category}
                 </span>
-                <span className="text-[11px] text-gray-400 font-mono flex items-center gap-1">
-                  <FaLayerGroup /> Architecture
+                <span className="hidden sm:flex text-[11px] text-slate-500 dark:text-slate-400 font-mono items-center gap-1">
+                  <FaLayerGroup /> Case Study
                 </span>
               </div>
 
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white group-hover:text-cyan-400 transition-colors">
+              <h3 className="text-xs sm:text-2xl font-bold text-slate-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors leading-tight">
                 {project.title}
               </h3>
               
-              <p className="mt-3 text-xs sm:text-sm text-gray-600 dark:text-gray-300 leading-relaxed line-clamp-3">
+              <p className="mt-1.5 sm:mt-2.5 text-[11px] sm:text-sm text-slate-600 dark:text-slate-300 leading-snug sm:leading-relaxed line-clamp-2 sm:line-clamp-3">
                 {project.tagline}
               </p>
 
-              {/* Performance Metric Badge */}
-              <div className="mt-4 inline-flex items-center gap-1.5 px-3 py-1 bg-purple-500/10 text-purple-600 dark:text-purple-400 text-xs font-mono font-semibold rounded-lg border border-purple-500/20">
-                {project.id === 'line-follower' ? <FaTrophy className="text-amber-400" /> : null}
-                <span>{project.metric}</span>
+              {/* Metric Badge */}
+              <div className="mt-2.5 sm:mt-4 inline-flex items-center gap-1 px-2 sm:px-3 py-0.5 sm:py-1 bg-purple-50 dark:bg-purple-500/10 text-purple-700 dark:text-purple-400 text-[10px] sm:text-xs font-mono font-semibold rounded-lg border border-purple-200 dark:border-purple-500/20 truncate max-w-full">
+                {project.id === 'line-follower' ? <FaTrophy className="text-amber-500 shrink-0" /> : null}
+                <span className="truncate">{project.metric}</span>
               </div>
 
-              <div className="mt-6 flex flex-wrap gap-2">
-                {project.techStack.slice(0, 4).map((tech, tIdx) => (
+              <div className="mt-3 sm:mt-5 flex flex-wrap gap-1 sm:gap-2">
+                {project.techStack.slice(0, 3).map((tech, tIdx) => (
                   <span
                     key={tIdx}
-                    className="px-2.5 py-1 text-xs bg-gray-100 dark:bg-gray-800/80 text-gray-700 dark:text-gray-300 rounded-md font-mono font-medium"
+                    className="px-2 py-0.5 text-[10px] sm:text-xs bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded font-mono font-medium border border-slate-200 dark:border-slate-700"
                   >
                     {tech}
                   </span>
@@ -134,9 +129,9 @@ const Projects = () => {
               </div>
             </div>
 
-            <div className="mt-8 pt-4 border-t border-gray-200 dark:border-gray-800 flex items-center justify-between text-cyan-600 dark:text-cyan-400 font-mono font-semibold text-xs">
-              <span>View Case Study & Schematic</span>
-              <FaArrowRight className="group-hover:translate-x-1.5 transition-transform" />
+            <div className="mt-4 sm:mt-8 pt-2.5 sm:pt-4 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between text-blue-600 dark:text-cyan-400 font-mono font-semibold text-[10px] sm:text-xs">
+              <span>Read Case Study</span>
+              <FaArrowRight className="group-hover:translate-x-1 transition-transform shrink-0" />
             </div>
           </motion.div>
         ))}
@@ -147,25 +142,25 @@ const Projects = () => {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="text-center max-w-2xl mb-8 relative z-10"
+        className="text-center max-w-2xl mb-6 sm:mb-8 relative z-10"
       >
-        <h3 className="text-3xl font-bold text-gray-900 dark:text-white flex items-center justify-center gap-2">
-          <span>⚡ Public Repositories & Open Source</span>
+        <h3 className="text-xl sm:text-3xl font-bold text-slate-900 dark:text-white flex items-center justify-center gap-2">
+          <span>⚡ Public Repositories</span>
         </h3>
-        <p className="text-gray-600 dark:text-gray-400 text-xs sm:text-sm mt-2">
-          Live synchronized feed from <span className="font-mono font-bold text-cyan-400">github.com/{GITHUB_USERNAME}</span>
+        <p className="text-slate-600 dark:text-slate-400 text-[11px] sm:text-sm mt-1.5">
+          Live synchronized feed from <span className="font-mono font-bold text-blue-600 dark:text-cyan-400">github.com/{GITHUB_USERNAME}</span>
         </p>
 
         {/* Repo Filter Tabs */}
-        <div className="flex flex-wrap justify-center gap-2 mt-6">
+        <div className="flex flex-wrap justify-center gap-1.5 sm:gap-2 mt-4 sm:mt-5">
           {REPO_CATEGORIES.map((cat) => (
             <button
               key={cat}
               onClick={() => setActiveRepoFilter(cat)}
-              className={`px-3.5 py-1.5 rounded-full text-xs font-mono font-semibold transition ${
+              className={`px-2.5 py-1 rounded-full text-[11px] sm:text-xs font-mono font-semibold transition ${
                 activeRepoFilter === cat
-                  ? 'bg-cyan-500 text-white shadow-md'
-                  : 'bg-white/80 dark:bg-gray-800/60 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-700'
+                  ? 'bg-blue-600 dark:bg-cyan-500 text-white shadow-md'
+                  : 'bg-white/90 dark:bg-slate-800/70 text-slate-800 dark:text-slate-300 border border-slate-300/80 dark:border-slate-700'
               }`}
             >
               {cat}
@@ -176,76 +171,67 @@ const Projects = () => {
 
       {/* Loading Indicator */}
       {loading && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="text-sm font-mono text-gray-500 dark:text-gray-400 animate-pulse my-8"
-        >
-          Connecting to GitHub API feed...
-        </motion.div>
+        <div className="text-xs font-mono text-slate-500 dark:text-slate-400 animate-pulse my-6">
+          Loading GitHub repositories...
+        </div>
       )}
 
       {/* Error Fallback */}
       {error && !loading && (
-        <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-mono max-w-md text-center my-6 flex items-center justify-center gap-2">
+        <div className="p-3.5 rounded-xl bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 text-amber-700 dark:text-amber-400 text-xs font-mono max-w-md text-center my-4 flex items-center justify-center gap-2">
           <FaExclamationTriangle />
-          <span>GitHub API rate limit reached. Displaying featured repositories.</span>
+          <span>GitHub feed cached. Displaying public projects.</span>
         </div>
       )}
 
-      {/* GitHub Repos Grid */}
-      <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl w-full">
+      {/* GitHub Repos Grid (2 Columns per row on Mobile!) */}
+      <div className="relative z-10 grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-8 max-w-7xl w-full">
         {filteredRepos.map((repo, index) => (
           <motion.div
             key={repo.id || index}
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            whileHover={{ scale: 1.02 }}
-            transition={{ duration: 0.4, delay: index * 0.05 }}
+            whileHover={{ y: -3 }}
+            transition={{ duration: 0.4, delay: index * 0.04 }}
             viewport={{ once: true }}
-            className="group relative p-6 rounded-3xl backdrop-blur-xl bg-white/40 dark:bg-gray-900/40 border border-gray-200 dark:border-gray-800 shadow-md hover:shadow-xl transition-all flex flex-col justify-between"
+            className="group relative p-3.5 sm:p-6 rounded-2xl sm:rounded-3xl backdrop-blur-xl bg-white/90 dark:bg-slate-900/60 border border-slate-300/80 dark:border-slate-800 shadow-md hover:shadow-xl transition-all flex flex-col justify-between"
           >
             <div>
-              <h4 className="text-lg font-bold text-gray-800 dark:text-white mb-2 group-hover:text-cyan-400 transition font-mono">
+              <h4 className="text-xs sm:text-lg font-bold text-slate-900 dark:text-white mb-1.5 group-hover:text-blue-600 dark:group-hover:text-cyan-400 transition font-mono truncate">
                 {repo.name}
               </h4>
 
-              <p className="text-gray-600 dark:text-gray-300 mb-4 text-xs leading-relaxed line-clamp-2">
-                {repo.description || 'Public engineering repository on GitHub.'}
+              <p className="text-slate-600 dark:text-slate-300 mb-3 text-[11px] sm:text-xs leading-snug sm:leading-relaxed line-clamp-2">
+                {repo.description || 'Public engineering repository.'}
               </p>
 
-              <div className="flex flex-wrap gap-2 text-[11px] font-mono font-medium text-gray-600 dark:text-gray-400 mb-4">
-                <span className="flex items-center gap-1 bg-gray-200/80 dark:bg-gray-800 px-2 py-0.5 rounded-full">
-                  <FaStar className="text-amber-400" /> {repo.stargazers_count || 0}
+              <div className="flex flex-wrap gap-1 text-[10px] font-mono font-medium text-slate-600 dark:text-slate-400 mb-3">
+                <span className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 rounded border border-slate-200 dark:border-slate-700">
+                  <FaStar className="text-amber-500" /> {repo.stargazers_count || 0}
                 </span>
-                <span className="flex items-center gap-1 bg-gray-200/80 dark:bg-gray-800 px-2 py-0.5 rounded-full">
-                  <FaCodeBranch className="text-cyan-400" /> {repo.forks_count || 0}
+                <span className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 rounded border border-slate-200 dark:border-slate-700">
+                  <FaCodeBranch className="text-blue-500 dark:text-cyan-500" /> {repo.forks_count || 0}
                 </span>
-                {repo.language && (
-                  <span className="flex items-center gap-1 bg-gray-200/80 dark:bg-gray-800 px-2 py-0.5 rounded-full">
-                    <FaCode /> {repo.language}
-                  </span>
-                )}
               </div>
             </div>
 
-            <div className="flex items-center justify-between pt-3 border-t border-gray-200 dark:border-gray-800 text-xs font-mono">
+            <div className="flex items-center justify-between pt-2.5 border-t border-slate-200 dark:border-slate-800 text-[10px] sm:text-xs font-mono">
               <a
                 href={repo.html_url || `https://github.com/SumanChettri/${repo.name}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1.5 text-cyan-600 dark:text-cyan-400 font-semibold hover:underline"
+                className="flex items-center gap-1 text-blue-600 dark:text-cyan-400 font-semibold hover:underline"
               >
-                <FaGithub /> Repository
+                <FaGithub /> Code
               </a>
               {repo.homepage && (
                 <a
                   href={repo.homepage}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 font-semibold hover:underline"
+                  className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400 font-semibold hover:underline"
                 >
-                  <FaExternalLinkAlt /> Live Demo
+                  <FaExternalLinkAlt /> Live
                 </a>
               )}
             </div>

@@ -2,30 +2,16 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaTerminal, FaTimes, FaArrowRight } from 'react-icons/fa';
 
-const SIMPLE_FUNNY_JOKES = [
-  "Why was the computer cold? Because it left its Windows open! 🥶",
-  "Why do programmers hate nature? It has too many bugs! 🐛",
-  "Software updates are like cleaning your room — you keep postponing until everything stops working! 🧹",
-  "Hardware: The part of a computer you can kick when the software freezes! 🦵",
-  "An optimist sees the glass half full. A pessimist sees it half empty. A programmer sees a 50% memory leak! 🥤",
-  "Why did the smartphone get glasses? Because it lost all its contacts! 👓"
-];
-
 const COMMANDS = {
-  help: 'Available commands: help, about, skills, projects, stack, services, experience, status, joke, resume, whoami, coffee, sudo, contact, github, theme, clear',
+  help: 'Available commands: help, about, skills, projects, philosophy, services, experience, status, resume, contact, github, theme, clear',
   about: 'Suman Chettri — Software Engineer building Full-Stack Web Apps, Mobile Apps, REST APIs, and connected ESP32/IoT Hardware Systems.',
   skills: 'Strong: C, C++, Java, SQL, HTML/CSS | Working: React 19, Node.js, Express, MongoDB, Git | Hands-on: ESP32/ESP8266, Arduino, React Native, REST APIs, Robotics PID | Familiar: Python, Docker, Data Analysis',
   projects: 'Flagship Projects: 1. Smart Parking (IoT+Web+Mobile) | 2. Organic Store (E-Commerce) | 3. High-Speed Line Follower (1st Place Winner 🏆) | 4. ARGUS Recon Rover | 5. Basketball Scoreboard (LED Matrix)',
-  stack: 'Full-Stack Web (React + Node + Express + MongoDB) ↔ Mobile (React Native) ↔ IoT Telemetry (ESP32 + IR + GSM + Sensors)',
+  philosophy: 'Core Principles: Bridging Software & Hardware ↔ Real-World Constraint Focus ↔ Clean Architecture ↔ Practical Problem Solving',
   services: 'Freelance Offerings: Full-Stack Web Apps, REST APIs, Mobile Apps, Organic E-Commerce Stores, IoT Hardware Prototypes, Embedded Motor Control',
   experience: 'Academic & Engineering: B.Tech CSE (SIST 2024-2027) | Diploma Computer Engineering (ATTC 2022-2024) | 1st Place Autonomous Robotics Winner',
   status: '🟢 Status: Available for Software Engineering, Full-Stack, IoT & Select Freelance Project Roles.',
   resume: 'Resume summary available. Request full PDF resume directly at sumantewari758@gmail.com',
-  whoami: 'You are a curious visitor exploring Suman Chettri\'s engineering portfolio. Welcome!',
-  coffee: '☕ Converting caffeine into clean code... Energy levels at 100%!',
-  sudo: '🔒 Permission denied: Nice try! But root access requires sending a message to sumantewari758@gmail.com.',
-  ping: '🏓 PONG! 1ms response speed — faster than your morning coffee machine.',
-  cat: '🐱 Meow! No cats or files were harmed in the making of this CLI palette.',
   contact: 'Email: sumantewari758@gmail.com | Phone: +91 9641025910 | GitHub: https://github.com/SumanChettri',
   github: 'Opening GitHub profile: https://github.com/SumanChettri',
 };
@@ -34,7 +20,7 @@ const CommandPalette = ({ isOpen, onClose, darkMode, toggleDarkMode }) => {
   const [input, setInput] = useState('');
   const [history, setHistory] = useState([
     { type: 'system', text: 'Welcome to Suman Chettri\'s Interactive Engineering CLI (v3.0).' },
-    { type: 'system', text: 'Type "help" for commands or "joke" for simple funny jokes!' },
+    { type: 'system', text: 'Type "help" for a list of available commands or "projects" to view flagship work.' },
   ]);
   const inputRef = useRef(null);
   const terminalEndRef = useRef(null);
@@ -62,10 +48,7 @@ const CommandPalette = ({ isOpen, onClose, darkMode, toggleDarkMode }) => {
         return;
       }
 
-      if (trimmed === 'joke') {
-        const randomJoke = SIMPLE_FUNNY_JOKES[Math.floor(Math.random() * SIMPLE_FUNNY_JOKES.length)];
-        newHistory.push({ type: 'system', text: `😄 ${randomJoke}` });
-      } else if (trimmed === 'theme') {
+      if (trimmed === 'theme') {
         toggleDarkMode();
         newHistory.push({ type: 'system', text: `Theme toggled to ${darkMode ? 'Light' : 'Dark'} mode.` });
       } else if (trimmed === 'github') {
@@ -74,7 +57,7 @@ const CommandPalette = ({ isOpen, onClose, darkMode, toggleDarkMode }) => {
       } else if (COMMANDS[trimmed]) {
         newHistory.push({ type: 'system', text: COMMANDS[trimmed] });
       } else {
-        newHistory.push({ type: 'error', text: `Command not found: "${trimmed}". Type "help" or "joke" for fun commands.` });
+        newHistory.push({ type: 'error', text: `Command not found: "${trimmed}". Type "help" for valid commands.` });
       }
 
       setHistory(newHistory);
@@ -86,22 +69,22 @@ const CommandPalette = ({ isOpen, onClose, darkMode, toggleDarkMode }) => {
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-md">
+      <div className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-4 bg-slate-950/80 backdrop-blur-md">
         <motion.div
           initial={{ opacity: 0, scale: 0.9, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.9, y: 20 }}
-          className="w-full max-w-3xl bg-gray-950 border border-gray-800 text-gray-100 rounded-2xl shadow-2xl overflow-hidden flex flex-col h-[480px] sm:h-[540px]"
+          className="w-full max-w-3xl bg-slate-950 border border-slate-800 text-slate-100 rounded-2xl shadow-2xl overflow-hidden flex flex-col h-[480px] sm:h-[540px]"
         >
           {/* Header */}
-          <div className="flex items-center justify-between px-4 sm:px-6 py-3.5 border-b border-gray-800 bg-gray-900/80">
+          <div className="flex items-center justify-between px-4 sm:px-6 py-3.5 border-b border-slate-800 bg-slate-900/80">
             <div className="flex items-center gap-2.5 text-cyan-400 font-mono text-xs sm:text-sm font-semibold truncate">
-              <FaTerminal className="text-base animate-pulse shrink-0" />
+              <FaTerminal className="text-base shrink-0" />
               <span className="truncate">suman-chettri@engineering-cli:~</span>
             </div>
             <button
               onClick={onClose}
-              className="text-gray-400 hover:text-white p-1 rounded-lg hover:bg-gray-800 transition shrink-0"
+              className="text-slate-400 hover:text-white p-1 rounded-lg hover:bg-slate-800 transition shrink-0"
             >
               <FaTimes size={16} />
             </button>
@@ -114,10 +97,10 @@ const CommandPalette = ({ isOpen, onClose, darkMode, toggleDarkMode }) => {
                 key={index}
                 className={`${
                   item.type === 'user'
-                    ? 'text-yellow-400 font-semibold'
+                    ? 'text-amber-300 font-semibold'
                     : item.type === 'error'
-                    ? 'text-red-400'
-                    : 'text-gray-300'
+                    ? 'text-rose-400'
+                    : 'text-slate-300'
                 }`}
               >
                 {item.text}
@@ -127,7 +110,7 @@ const CommandPalette = ({ isOpen, onClose, darkMode, toggleDarkMode }) => {
           </div>
 
           {/* Command Input Area */}
-          <div className="px-4 sm:px-6 py-3 sm:py-4 border-t border-gray-800 bg-gray-900/60 flex items-center gap-2.5">
+          <div className="px-4 sm:px-6 py-3 sm:py-4 border-t border-slate-800 bg-slate-900/60 flex items-center gap-2.5">
             <span className="text-emerald-400 font-mono font-bold">$</span>
             <input
               ref={inputRef}
@@ -135,10 +118,10 @@ const CommandPalette = ({ isOpen, onClose, darkMode, toggleDarkMode }) => {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleCommand}
-              placeholder="Type a command (e.g. help, joke, projects, stack)..."
-              className="flex-1 bg-transparent text-gray-100 font-mono outline-none placeholder-gray-600 text-xs sm:text-sm"
+              placeholder="Type a command (e.g. help, projects, philosophy, status)..."
+              className="flex-1 bg-transparent text-slate-100 font-mono outline-none placeholder-slate-500 text-xs sm:text-sm"
             />
-            <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 bg-gray-800/80 rounded-md text-[11px] text-gray-400 font-mono border border-gray-700">
+            <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 bg-slate-800 rounded-md text-[11px] text-slate-400 font-mono border border-slate-700">
               <span>Press Enter</span>
               <FaArrowRight size={10} />
             </div>

@@ -3,28 +3,25 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Parallax } from "react-scroll-parallax";
 import {
-  FaArrowDown, FaTerminal, FaLaptopCode, FaMicrochip
+  FaArrowDown, FaTerminal, FaLaptopCode, FaMicrochip, FaArrowRight
 } from "react-icons/fa";
 import {
-  SiReact, SiNodedotjs, SiPython, SiMongodb, SiDocker, SiCplusplus
+  SiReact, SiNodedotjs, SiPython, SiMongodb, SiCplusplus
 } from "react-icons/si";
 
 const CODE_SNIPPET = `const engineer = {
   name: "Suman Chettri",
   role: "Software Engineer",
-  coffeeToCodeRatio: Infinity,
-  bugsInProduction: 0, // *fingers crossed* 🤞
-  domains: ["Full-Stack Web", "Mobile Apps", "IoT & Embedded"],
-  languages: ["C", "C++", "Java", "SQL", "JavaScript"],
-  hardware: ["ESP32", "Arduino", "IR Arrays", "PID Motors"],
-  motto: "Bridging modern apps with physical hardware.",
-  status: "Available for Roles & Freelance Collaboration 🟢",
+  focus: ["Full-Stack Web", "Mobile Apps", "IoT & Embedded Systems"],
+  languages: ["C", "C++", "Java", "SQL", "JavaScript", "Python"],
+  hardware: ["ESP32", "Arduino", "IR Sensor Arrays", "PID Controllers"],
+  location: "Sikkim, India",
+  status: "Available for Software Roles & Engineering Projects 🟢",
 };`;
 
 const Home = ({ onOpenCmd }) => {
   const [typedText, setTypedText] = useState("");
 
-  // Code Typewriter animation effect
   useEffect(() => {
     let index = 0;
     const interval = setInterval(() => {
@@ -40,164 +37,141 @@ const Home = ({ onOpenCmd }) => {
   }, []);
 
   return (
-    <motion.section
+    <section
       id="home"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.8 }}
-      className="relative min-h-screen flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8 py-24 sm:py-28 bg-gradient-to-br from-gray-100 via-gray-200 to-white dark:from-gray-950 dark:via-black dark:to-gray-950 transition-all duration-500 overflow-hidden"
+      className="relative min-h-[90vh] flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8 py-20 sm:py-28 bg-gradient-to-br from-slate-200/80 via-slate-100 to-zinc-200/90 dark:from-slate-950 dark:via-black dark:to-slate-950 text-slate-900 dark:text-slate-100 transition-all duration-500 overflow-hidden"
     >
       {/* Background Parallax Orbs */}
       <Parallax speed={-15}>
-        <div className="absolute top-10 left-5 w-72 sm:w-96 h-72 sm:h-96 bg-cyan-600/15 blur-3xl rounded-full pointer-events-none"></div>
+        <div className="absolute top-8 left-2 w-[280px] sm:w-[500px] h-[280px] sm:h-[500px] bg-cyan-500/20 dark:bg-cyan-500/15 blur-[100px] sm:blur-[120px] rounded-full pointer-events-none"></div>
       </Parallax>
       <Parallax speed={10}>
-        <div className="absolute bottom-10 right-5 w-72 sm:w-96 h-72 sm:h-96 bg-purple-600/15 blur-3xl rounded-full pointer-events-none"></div>
+        <div className="absolute bottom-8 right-2 w-[280px] sm:w-[500px] h-[280px] sm:h-[500px] bg-purple-600/20 dark:bg-purple-600/15 blur-[100px] sm:blur-[120px] rounded-full pointer-events-none"></div>
       </Parallax>
 
-      {/* Subtle Circuit Grid Pattern */}
-      <div className="absolute inset-0 bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:24px_24px] opacity-30 pointer-events-none"></div>
+      {/* Cyber Dots Overlay */}
+      <div className="absolute inset-0 bg-[radial-gradient(#475569_1.2px,transparent_1.2px)] dark:bg-[radial-gradient(#38bdf8_1.2px,transparent_1.2px)] [background-size:20px_20px] sm:[background-size:24px_24px] opacity-25 dark:opacity-30 pointer-events-none"></div>
 
-      {/* Main Hero Layout */}
-      <div className="relative z-10 max-w-7xl w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center my-auto">
+      {/* Hero Container */}
+      <div className="relative z-10 max-w-7xl w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center my-auto pt-4 sm:pt-0">
         
-        {/* Left Column: Headline & Typewriter */}
+        {/* Left Column: Identity */}
         <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
           className="lg:col-span-7 flex flex-col items-start text-left"
         >
-          {/* Status Badge */}
-          <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ delay: 0.3 }}
-            className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-xs font-mono font-semibold tracking-wide mb-6 shadow-sm max-w-full overflow-hidden"
-          >
-            <span className="relative flex h-2.5 w-2.5 shrink-0">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+          {/* Status Pill */}
+          <div className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1.5 rounded-full bg-slate-900/10 dark:bg-emerald-500/15 border border-slate-300 dark:border-emerald-500/30 text-slate-800 dark:text-emerald-400 text-[11px] sm:text-xs font-mono font-semibold tracking-wide mb-4 sm:mb-5 shadow-sm">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
             </span>
             <span className="truncate">Software Engineer — Full-Stack • Mobile • IoT • Embedded</span>
-          </motion.div>
+          </div>
 
           {/* Headline */}
-          <h1 className="text-3xl sm:text-5xl lg:text-7xl font-extrabold leading-[1.15] sm:leading-[1.1] text-gray-900 dark:text-white tracking-tight">
-            Engineering <br />
-            <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent">
-              Full-Stack Apps &
-            </span> <br />
-            Connected Devices.
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.15] text-slate-900 dark:text-white tracking-tight">
+            Building Full-Stack Apps & <br />
+            <span className="bg-gradient-to-r from-blue-700 via-cyan-600 to-purple-700 dark:from-cyan-400 dark:via-blue-500 dark:to-purple-500 bg-clip-text text-transparent">
+              Connected Systems.
+            </span>
           </h1>
 
-          <p className="mt-5 sm:mt-6 text-sm sm:text-lg lg:text-xl text-gray-600 dark:text-gray-300 leading-relaxed max-w-2xl font-normal">
-            Hi, I'm <strong className="text-gray-900 dark:text-white font-semibold">Suman Chettri</strong>. I design and build full-stack web applications, mobile apps, REST APIs, and physical ESP32 connected hardware. No fluff, just working software.
+          <p className="mt-3 sm:mt-5 text-sm sm:text-lg text-slate-700 dark:text-slate-300 leading-relaxed max-w-2xl font-normal">
+            Hi, I'm <strong className="text-slate-950 dark:text-white font-bold">Suman Chettri</strong>. I design web applications, mobile apps, REST APIs, and microcontroller firmware that bridge digital software with physical hardware.
           </p>
 
-          {/* Typewriter Code Block */}
-          <div className="mt-6 sm:mt-8 w-full max-w-xl bg-gray-950 border border-gray-800 rounded-2xl p-4 sm:p-5 shadow-2xl font-mono text-xs sm:text-sm text-gray-200 overflow-hidden">
-            <div className="flex items-center justify-between pb-2.5 mb-2.5 border-b border-gray-800 text-gray-400 text-xs">
-              <div className="flex items-center gap-2">
-                <span className="w-3 h-3 rounded-full bg-red-500/80 inline-block"></span>
-                <span className="w-3 h-3 rounded-full bg-yellow-500/80 inline-block"></span>
-                <span className="w-3 h-3 rounded-full bg-green-500/80 inline-block"></span>
+          {/* Code Config Box */}
+          <div className="mt-5 sm:mt-6 w-full max-w-xl bg-slate-900 dark:bg-slate-950 border border-slate-700 dark:border-slate-800 rounded-2xl p-3.5 sm:p-5 shadow-xl font-mono text-[11px] sm:text-sm text-slate-200 overflow-hidden">
+            <div className="flex items-center justify-between pb-2.5 mb-2.5 border-b border-slate-800 text-slate-400 text-xs">
+              <div className="flex items-center gap-1.5">
+                <span className="w-2.5 h-2.5 rounded-full bg-red-500/80 inline-block"></span>
+                <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80 inline-block"></span>
+                <span className="w-2.5 h-2.5 rounded-full bg-green-500/80 inline-block"></span>
               </div>
-              <span className="text-gray-500 text-[11px]">engineer.config.ts</span>
+              <span className="text-slate-400 text-[10px] sm:text-[11px]">engineer.config.ts</span>
             </div>
-            <pre className="text-emerald-400 overflow-x-auto whitespace-pre-wrap leading-relaxed text-[11px] sm:text-xs">
+            <pre className="text-emerald-400 overflow-x-auto whitespace-pre-wrap leading-relaxed max-h-[160px] sm:max-h-none font-mono">
               <code>{typedText}</code>
-              <span className="animate-pulse inline-block w-2 h-4 bg-emerald-400 ml-1"></span>
+              <span className="animate-pulse inline-block w-1.5 h-3.5 bg-emerald-400 ml-1"></span>
             </pre>
           </div>
 
-          {/* Action CTA Buttons */}
-          <div className="mt-6 sm:mt-8 flex flex-wrap items-center gap-3 sm:gap-4 w-full sm:w-auto">
-            <motion.a
+          {/* Touch-Optimized Action Buttons */}
+          <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
+            <a
               href="#projects"
-              whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.96 }}
-              className="w-full sm:w-auto text-center px-6 sm:px-8 py-3 sm:py-3.5 text-xs sm:text-sm md:text-base font-semibold text-white bg-gradient-to-r from-cyan-500 via-blue-600 to-purple-600 rounded-full shadow-xl hover:shadow-cyan-500/25 transition"
+              className="text-center px-6 py-3.5 text-xs sm:text-sm font-semibold text-white bg-gradient-to-r from-blue-600 via-cyan-600 to-purple-600 dark:from-cyan-500 dark:to-purple-600 rounded-xl shadow-md active:scale-98 transition"
             >
-              Explore Flagship Systems
-            </motion.a>
+              Explore Engineering Projects
+            </a>
 
-            <motion.button
+            <button
               onClick={onOpenCmd}
-              whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.96 }}
-              className="w-full sm:w-auto px-6 py-3 sm:py-3.5 text-xs sm:text-sm md:text-base font-mono font-semibold text-emerald-400 bg-gray-900 dark:bg-black rounded-full shadow-lg border border-gray-800 flex items-center justify-center gap-2 transition"
+              className="px-6 py-3.5 text-xs sm:text-sm font-mono font-semibold text-slate-800 dark:text-slate-200 bg-white/90 dark:bg-slate-900 rounded-xl shadow-sm border border-slate-300 dark:border-slate-800 flex items-center justify-center gap-2 active:scale-98 transition hover:bg-slate-50 dark:hover:bg-slate-800"
             >
-              <FaTerminal />
-              <span>[ &gt;_ Terminal CLI ]</span>
-            </motion.button>
+              <FaTerminal className="text-cyan-600 dark:text-cyan-400" />
+              <span>[ &gt;_ CLI Terminal ]</span>
+            </button>
           </div>
         </motion.div>
 
-        {/* Right Column: Multi-Disciplinary Metric Cards */}
+        {/* Right Column: Focus Areas */}
         <motion.div
-          initial={{ opacity: 0, x: 30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="lg:col-span-5 flex flex-col gap-4 sm:gap-6 mt-4 lg:mt-0"
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="lg:col-span-5 flex flex-col gap-3.5 sm:gap-5 mt-2 lg:mt-0"
         >
           {/* Card 1: Web & Mobile */}
-          <motion.div
-            whileHover={{ y: -4, scale: 1.01 }}
-            className="p-5 sm:p-6 rounded-3xl backdrop-blur-xl bg-white/70 dark:bg-gray-900/50 border border-gray-200 dark:border-gray-800 shadow-xl flex items-center gap-4 sm:gap-5 transition"
-          >
-            <div className="p-3.5 sm:p-4 rounded-2xl bg-cyan-500/10 text-cyan-400 text-2xl sm:text-3xl shrink-0">
+          <div className="p-4 sm:p-6 rounded-2xl bg-white/90 dark:bg-slate-900/60 backdrop-blur-xl border border-slate-300/80 dark:border-slate-800 shadow-md flex items-center gap-3.5 sm:gap-4 transition">
+            <div className="p-2.5 sm:p-3 rounded-xl bg-blue-500/10 text-blue-600 dark:text-cyan-400 text-xl sm:text-3xl shrink-0">
               <FaLaptopCode />
             </div>
             <div>
-              <span className="text-[11px] font-mono font-bold text-cyan-400 uppercase tracking-wider">Web & E-Commerce</span>
-              <h3 className="text-base sm:text-lg font-bold text-gray-900 dark:text-white">Full-Stack & Mobile Apps</h3>
-              <p className="text-xs text-gray-600 dark:text-gray-400 mt-0.5">React 19, Organic Store, React Native & Express APIs</p>
+              <span className="text-[10px] sm:text-[11px] font-mono font-bold text-blue-700 dark:text-cyan-400 uppercase tracking-wider">Web & Mobile</span>
+              <h3 className="text-sm sm:text-lg font-bold text-slate-900 dark:text-white">Full-Stack & E-Commerce</h3>
+              <p className="text-[11px] sm:text-xs text-slate-600 dark:text-slate-400 mt-0.5">React 19, Organic Store, React Native & REST APIs</p>
             </div>
-          </motion.div>
+          </div>
 
           {/* Card 2: IoT & Hardware */}
-          <motion.div
-            whileHover={{ y: -4, scale: 1.01 }}
-            className="p-5 sm:p-6 rounded-3xl backdrop-blur-xl bg-white/70 dark:bg-gray-900/50 border border-gray-200 dark:border-gray-800 shadow-xl flex items-center gap-4 sm:gap-5 transition"
-          >
-            <div className="p-3.5 sm:p-4 rounded-2xl bg-orange-500/10 text-orange-400 text-2xl sm:text-3xl shrink-0">
+          <div className="p-4 sm:p-6 rounded-2xl bg-white/90 dark:bg-slate-900/60 backdrop-blur-xl border border-slate-300/80 dark:border-slate-800 shadow-md flex items-center gap-3.5 sm:gap-4 transition">
+            <div className="p-2.5 sm:p-3 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 text-xl sm:text-3xl shrink-0">
               <FaMicrochip />
             </div>
             <div>
-              <span className="text-[11px] font-mono font-bold text-orange-400 uppercase tracking-wider">Hardware & Embedded</span>
-              <h3 className="text-base sm:text-lg font-bold text-gray-900 dark:text-white">ESP32 & Microcontrollers</h3>
-              <p className="text-xs text-gray-600 dark:text-gray-400 mt-0.5">Keypad OTPs, IR Sensor Arrays, PID Control & GSM</p>
+              <span className="text-[10px] sm:text-[11px] font-mono font-bold text-amber-700 dark:text-amber-400 uppercase tracking-wider">Hardware & Embedded</span>
+              <h3 className="text-sm sm:text-lg font-bold text-slate-900 dark:text-white">ESP32 Firmware & PID</h3>
+              <p className="text-[11px] sm:text-xs text-slate-600 dark:text-slate-400 mt-0.5">Keypad OTP, IR arrays, PID motor control & telemetry</p>
             </div>
-          </motion.div>
+          </div>
 
-          {/* Multi-Domain Tech Strip */}
-          <div className="p-5 sm:p-6 rounded-3xl backdrop-blur-xl bg-white/70 dark:bg-gray-900/50 border border-gray-200 dark:border-gray-800 shadow-xl">
-            <span className="text-[11px] font-mono font-bold text-gray-400 uppercase tracking-wider block mb-3">
-              Multi-Domain Engineering Ecosystem
+          {/* Tech Strip */}
+          <div className="p-4 sm:p-5 rounded-2xl bg-white/90 dark:bg-slate-900/60 backdrop-blur-xl border border-slate-300/80 dark:border-slate-800 shadow-md">
+            <span className="text-[10px] sm:text-[11px] font-mono font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider block mb-2.5">
+              Core Tech Stack
             </span>
-            <div className="flex items-center justify-between text-2xl sm:text-3xl">
-              <SiReact className="text-[#61DAFB] hover:scale-125 transition-transform" title="React 19 & React Native" />
-              <SiNodedotjs className="text-[#5FA04E] hover:scale-125 transition-transform" title="Node.js & Express" />
-              <SiCplusplus className="text-[#00599C] hover:scale-125 transition-transform" title="C++ Firmware" />
-              <FaMicrochip className="text-orange-400 hover:scale-125 transition-transform" title="ESP32 / Arduino" />
-              <SiPython className="text-[#3776AB] hover:scale-125 transition-transform" title="Python" />
-              <SiMongodb className="text-[#47A248] hover:scale-125 transition-transform" title="MongoDB" />
+            <div className="flex items-center justify-between text-xl sm:text-2xl text-slate-700 dark:text-slate-200">
+              <SiReact className="text-[#61DAFB]" title="React 19 & React Native" />
+              <SiNodedotjs className="text-[#5FA04E]" title="Node.js & Express" />
+              <SiCplusplus className="text-[#00599C]" title="C++ Firmware" />
+              <FaMicrochip className="text-amber-500" title="ESP32 / Arduino" />
+              <SiPython className="text-[#3776AB]" title="Python" />
+              <SiMongodb className="text-[#47A248]" title="MongoDB" />
             </div>
           </div>
         </motion.div>
       </div>
 
-      {/* Scroll Down Indicator */}
-      <motion.div
-        animate={{ y: [0, 8, 0] }}
-        transition={{ repeat: Infinity, duration: 2 }}
-        className="mt-8 lg:mt-0 flex flex-col items-center text-gray-500 dark:text-gray-400 text-xs font-mono"
-      >
-        <span>Scroll to Explore Architecture</span>
+      {/* Scroll Down */}
+      <div className="mt-8 flex flex-col items-center text-slate-600 dark:text-slate-400 text-xs font-mono">
+        <span>Scroll to Explore</span>
         <FaArrowDown className="mt-1 text-xs animate-bounce" />
-      </motion.div>
-    </motion.section>
+      </div>
+    </section>
   );
 };
 

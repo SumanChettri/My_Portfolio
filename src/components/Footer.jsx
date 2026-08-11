@@ -40,7 +40,7 @@ const Footer = () => {
         </svg>
       </div>
 
-      {/* Footer */}
+      {/* Footer Container */}
       <motion.footer
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -54,34 +54,38 @@ const Footer = () => {
           </div>
 
           {/* Social Links */}
-          <div className="flex gap-6">
+          <div className="flex items-center gap-6">
             <a
               href="https://github.com/SumanChettri"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-800 dark:text-white hover:text-blue-500 dark:hover:text-blue-400 text-2xl transition-transform hover:scale-110"
+              title="GitHub"
             >
               <FaGithub />
             </a>
             <a
-              href="https://linkedin.com/" // Replace with your LinkedIn
+              href="https://linkedin.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-800 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 text-2xl transition-transform hover:scale-110"
+              className="text-gray-800 dark:text-white hover:text-[#0A66C2] text-2xl transition-transform hover:scale-110"
+              title="LinkedIn"
             >
               <FaLinkedin />
             </a>
             <a
-              href="https://instagram.com/" // Replace with your Instagram
+              href="https://instagram.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-800 dark:text-white hover:text-pink-500 dark:hover:text-pink-400 text-2xl transition-transform hover:scale-110"
+              className="text-gray-800 dark:text-white hover:text-[#E4405F] text-2xl transition-transform hover:scale-110"
+              title="Instagram"
             >
               <FaInstagram />
             </a>
             <a
-              href="mailto:sumanchettri@example.com" // Replace with your email
-              className="text-gray-800 dark:text-white hover:text-green-500 dark:hover:text-green-400 text-2xl transition-transform hover:scale-110"
+              href="mailto:sumantewari758@gmail.com"
+              className="text-gray-800 dark:text-white hover:text-[#EA4335] text-2xl transition-transform hover:scale-110"
+              title="Email"
             >
               <FaEnvelope />
             </a>

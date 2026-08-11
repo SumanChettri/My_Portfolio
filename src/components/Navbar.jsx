@@ -1,9 +1,19 @@
 // src/components/Navbar.jsx
 import React, { useState, useEffect } from 'react';
-import { FaBars, FaTimes, FaMoon, FaSun } from 'react-icons/fa';
+import { FaBars, FaTimes, FaMoon, FaSun, FaPaperPlane } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const Navbar = ({ darkMode, toggleDarkMode }) => {
+const NAV_ITEMS = [
+  { id: 'home', label: 'Home' },
+  { id: 'about', label: 'About' },
+  { id: 'capabilities', label: 'Capabilities' },
+  { id: 'projects', label: 'Projects' },
+  { id: 'stack-map', label: 'Stack Map' },
+  { id: 'services', label: 'Services' },
+  { id: 'contact', label: 'Contact' },
+];
+
+const Navbar = ({ darkMode, toggleDarkMode, onOpenCmd }) => {
   const [navOpen, setNavOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -17,12 +27,6 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const menuVariants = {
-    hidden: { opacity: 0, y: -20 },
-    visible: { opacity: 1, y: 0 },
-    exit: { opacity: 0, y: -20 },
-  };
-
   const mobileMenuVariants = {
     hidden: { opacity: 0, height: 0 },
     visible: { opacity: 1, height: 'auto' },
@@ -32,48 +36,75 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
   return (
     <div className="fixed top-3 left-0 right-0 z-50 flex justify-center px-4">
       <nav
-        className={`w-full max-w-7xl rounded-xl ${
+        className={`w-full max-w-7xl rounded-2xl ${
           scrolled
-            ? 'backdrop-blur-md bg-white/30 dark:bg-black/30 border border-gray-300 dark:border-gray-700 shadow-md'
-            : 'bg-transparent border border-gray-200 dark:border-gray-800'
+            ? 'backdrop-blur-xl bg-white/80 dark:bg-black/80 border border-gray-300 dark:border-gray-800 shadow-xl'
+            : 'bg-transparent border border-gray-200/50 dark:border-gray-800/50'
         } transition-all duration-300`}
       >
-        <div className="flex items-center justify-between py-4 px-4">
+        <div className="flex items-center justify-between py-3 px-6">
           {/* Logo */}
-        <div className="text-3xl font-extrabold text-gray-900 dark:text-white">
-          Suman Tewari 🚀
-        </div>
+          <a href="#home" className="text-xl sm:text-2xl font-extrabold text-gray-900 dark:text-white flex items-center gap-2">
+            <span>Suman Chettri</span>
+            <span className="text-xs px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-500 border border-cyan-500/20 font-mono">SE</span>
+          </a>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-10">
-            {['home', 'about', 'projects', 'contact'].map((item) => (
+          <div className="hidden lg:flex items-center space-x-6">
+            {NAV_ITEMS.map((item) => (
               <a
-                key={item}
-                href={`#${item}`}
-                className="text-lg capitalize text-gray-700 dark:text-gray-200 hover:text-orange-500 dark:hover:text-orange-400 transition-colors duration-300 relative group"
+                key={item.id}
+                href={`#${item.id}`}
+                className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors duration-200 relative group"
               >
-                <span>{item}</span>
-                <span className="block h-0.5 w-0 bg-orange-500 group-hover:w-full transition-all duration-300"></span>
+                <span>{item.label}</span>
+                <span className="block h-0.5 w-0 bg-cyan-500 group-hover:w-full transition-all duration-300"></span>
               </a>
             ))}
+
+            {/* CLI Terminal Trigger */}
+            <button
+              onClick={onOpenCmd}
+              className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-gray-900 dark:bg-gray-900 text-emerald-400 hover:bg-black text-xs font-mono font-semibold border border-gray-700 shadow-sm transition"
+              title="Open Terminal (Cmd+K / Ctrl+K)"
+            >
+              <span className="animate-pulse">🟢</span>
+              <span>[ &gt;_ CLI ]</span>
+            </button>
 
             {/* Dark Mode Toggle */}
             <button
               onClick={toggleDarkMode}
-              className="ml-6 p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+              className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+              title="Toggle Theme"
             >
               {darkMode ? (
-                <FaSun className="text-yellow-500" />
+                <FaSun className="text-yellow-500 text-sm" />
               ) : (
-                <FaMoon className="text-gray-800" />
+                <FaMoon className="text-gray-800 text-sm" />
               )}
             </button>
+
+            {/* Freelance CTA */}
+            <a
+              href="#contact"
+              className="px-4 py-2 text-xs font-bold text-white bg-gradient-to-r from-cyan-500 to-purple-600 rounded-full shadow-md hover:shadow-cyan-500/20 transition flex items-center gap-1.5"
+            >
+              <FaPaperPlane className="text-[10px]" />
+              <span>Start a Project</span>
+            </a>
           </div>
 
           {/* Mobile Toggle */}
-          <div className="md:hidden">
-            <button onClick={toggleNav} className="text-gray-800 dark:text-white">
-              {navOpen ? <FaTimes size={26} /> : <FaBars size={26} />}
+          <div className="lg:hidden flex items-center gap-3">
+            <button
+              onClick={onOpenCmd}
+              className="px-2.5 py-1 rounded-full bg-gray-900 text-emerald-400 text-xs font-mono font-semibold border border-gray-800"
+            >
+              &gt;_ CLI
+            </button>
+            <button onClick={toggleNav} className="text-gray-800 dark:text-white p-1">
+              {navOpen ? <FaTimes size={22} /> : <FaBars size={22} />}
             </button>
           </div>
         </div>
@@ -87,36 +118,39 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
               exit="exit"
               variants={mobileMenuVariants}
               transition={{ duration: 0.3 }}
-              className="md:hidden bg-white/90 dark:bg-black/90 backdrop-blur-md w-full shadow-lg overflow-hidden border-t border-gray-200 dark:border-gray-700 rounded-b-xl"
+              className="lg:hidden bg-white/95 dark:bg-black/95 backdrop-blur-xl w-full shadow-2xl overflow-hidden border-t border-gray-200 dark:border-gray-800 rounded-b-2xl"
             >
-              <div className="flex flex-col py-4 space-y-2">
-                {['home', 'about', 'projects', 'contact'].map((item) => (
-                  <motion.a
-                    key={item}
-                    href={`#${item}`}
-                    variants={menuVariants}
-                    whileHover={{ scale: 1.05 }}
+              <div className="flex flex-col py-4 px-6 space-y-3">
+                {NAV_ITEMS.map((item) => (
+                  <a
+                    key={item.id}
+                    href={`#${item.id}`}
                     onClick={toggleNav}
-                    className="block text-center text-gray-800 dark:text-white py-3 text-lg capitalize hover:bg-orange-100 dark:hover:bg-gray-800 transition-colors"
+                    className="text-left text-gray-800 dark:text-gray-200 py-2 text-base font-semibold hover:text-cyan-500 transition-colors"
                   >
-                    {item}
-                  </motion.a>
+                    {item.label}
+                  </a>
                 ))}
 
-                {/* Dark Mode Toggle */}
-                <button
-                  onClick={() => {
-                    toggleDarkMode();
-                    toggleNav();
-                  }}
-                  className="mx-auto mt-4 p-3 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-                >
-                  {darkMode ? (
-                    <FaSun className="text-yellow-500" />
-                  ) : (
-                    <FaMoon className="text-gray-800" />
-                  )}
-                </button>
+                <div className="pt-4 border-t border-gray-200 dark:border-gray-800 flex items-center justify-between">
+                  <button
+                    onClick={() => {
+                      toggleDarkMode();
+                      toggleNav();
+                    }}
+                    className="p-2.5 rounded-full bg-gray-100 dark:bg-gray-800 text-sm"
+                  >
+                    {darkMode ? <FaSun className="text-yellow-500" /> : <FaMoon className="text-gray-800" />}
+                  </button>
+
+                  <a
+                    href="#contact"
+                    onClick={toggleNav}
+                    className="px-5 py-2.5 text-xs font-bold text-white bg-gradient-to-r from-cyan-500 to-purple-600 rounded-full shadow-md"
+                  >
+                    Start a Project &rarr;
+                  </a>
+                </div>
               </div>
             </motion.div>
           )}
